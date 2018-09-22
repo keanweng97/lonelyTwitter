@@ -32,6 +32,8 @@ proguard/
 *.ear
 
 # Additional Files #
+.idea/
+gradle/
 *.iml
 .gradle
 /local.properties
