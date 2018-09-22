@@ -58,6 +58,13 @@ public class LonelyTwitterActivity extends Activity {
 
 	private String[] loadFromFile() {
 		ArrayList<String> tweets = new ArrayList<String>();
+		ArrayList<Mood> moodList = new ArrayList<Mood>();
+
+		HappyMood happyMood = new HappyMood();
+		SadMood sadMood = new SadMood();
+		moodList.add(happyMood);
+		moodList.add(sadMood);
+
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
