@@ -12,6 +12,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +24,9 @@ public class LonelyTwitterActivity extends Activity {
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
-	
+	private ArrayList<String> tweets = new ArrayList<String>();
+	private ArrayAdapter<String> adapter;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,12 @@ public class LonelyTwitterActivity extends Activity {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				setResult(RESULT_OK);
+				//setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
+
+				tweets.add(new Date().toString()+" | "+text);
+				adapter.notifyDataSetChanged();
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
 
 			}
 		});
@@ -50,14 +55,13 @@ public class LonelyTwitterActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		String[] tweets = loadFromFile();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		loadFromFile();
+		adapter = new ArrayAdapter<String>(this,
 				R.layout.list_item, tweets);
 		oldTweetsList.setAdapter(adapter);
 	}
 
-	private String[] loadFromFile() {
-		ArrayList<String> tweets = new ArrayList<String>();
+	private void loadFromFile() {
 		ArrayList<Mood> moodList = new ArrayList<Mood>();
 
 		HappyMood happyMood = new HappyMood();
@@ -81,7 +85,7 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return tweets.toArray(new String[tweets.size()]);
+		//return tweets.toArray(new String[tweets.size()]);
 	}
 	
 	private void saveInFile(String text, Date date) {
