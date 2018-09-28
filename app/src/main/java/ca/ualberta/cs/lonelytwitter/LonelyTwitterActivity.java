@@ -2,6 +2,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +27,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class LonelyTwitterActivity extends Activity {
+public class LonelyTwitterActivity extends Activity implements View.OnClickListener {
 
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
@@ -43,26 +44,32 @@ public class LonelyTwitterActivity extends Activity {
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
+		Button clearButton = (Button) findViewById(R.id.clear);
 
-		saveButton.setOnClickListener(new View.OnClickListener() {
+		saveButton.setOnClickListener(this);
+		clearButton.setOnClickListener(this);
+	}
 
-			public void onClick(View v) {
-				//setResult(RESULT_OK);
-				String text = bodyText.getText().toString();
-				ImportantTweet newTweet = new ImportantTweet(text);
-				try{
-					newTweet.setMessage(text);
-				}
-				catch(TooLongTweetException e){}
+	public void onClick(View v) {
 
-				tweets.add(newTweet);
+		if(v.getId() == R.id.save) {
+			String text = bodyText.getText().toString();
+			ImportantTweet newTweet = new ImportantTweet(text);
 
-				//tweets.add(new Date().toString()+" | "+text);
-				adapter.notifyDataSetChanged();
-				saveInFile();
-
+			try {
+				newTweet.setMessage(text);
+			} catch (TooLongTweetException e) {
 			}
-		});
+
+			tweets.add(newTweet);
+			adapter.notifyDataSetChanged();
+			saveInFile();
+		}
+		else if(v.getId() == R.id.clear){
+			tweets.clear();
+			adapter.notifyDataSetChanged();
+			clearFile();
+		}
 	}
 
 	@Override
@@ -93,7 +100,6 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return tweets.toArray(new String[tweets.size()]);
 	}
 	
 	private void saveInFile() {
@@ -115,5 +121,9 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void clearFile() {
+		deleteFile(FILENAME);
 	}
 }
