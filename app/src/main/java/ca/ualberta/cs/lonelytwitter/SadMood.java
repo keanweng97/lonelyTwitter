@@ -1,9 +1,13 @@
 package ca.ualberta.cs.lonelytwitter;
 
-import java.util.Date;
-
+/**
+ * The type Sad mood.
+ */
 public class SadMood extends Mood {
 
+    /**
+     * Instantiates a new Sad mood.
+     */
     public SadMood(){
         super();
     }

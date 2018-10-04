@@ -27,6 +27,9 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * The type Lonely twitter activity.
+ */
 public class LonelyTwitterActivity extends Activity implements View.OnClickListener {
 
 	private static final String FILENAME = "file.sav";
@@ -82,6 +85,10 @@ public class LonelyTwitterActivity extends Activity implements View.OnClickListe
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * Reads FILENAME and load into ImportantTweet ArrayList emotions.
+	 * Throws exception if file is not found.
+	 */
 	private void loadFromFile() {
 
 		try {
@@ -101,7 +108,11 @@ public class LonelyTwitterActivity extends Activity implements View.OnClickListe
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Saves ArrayList emotions into FILENAME. Overwrites previous files.
+	 * Throws exception if file is not found.
+	 */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
@@ -123,6 +134,9 @@ public class LonelyTwitterActivity extends Activity implements View.OnClickListe
 		}
 	}
 
+	/**
+	 * Delete FILENAME.
+	 */
 	private void clearFile() {
 		deleteFile(FILENAME);
 	}

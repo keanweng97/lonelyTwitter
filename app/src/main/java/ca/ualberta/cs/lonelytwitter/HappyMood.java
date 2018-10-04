@@ -1,9 +1,13 @@
 package ca.ualberta.cs.lonelytwitter;
 
-import java.util.Date;
-
+/**
+ * The type Happy mood.
+ */
 public class HappyMood extends Mood {
 
+    /**
+     * Instantiates a new Happy mood.
+     */
     public HappyMood(){
         super();
     }
