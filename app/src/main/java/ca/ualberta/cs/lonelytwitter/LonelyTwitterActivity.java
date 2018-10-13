@@ -44,10 +44,10 @@ public class LonelyTwitterActivity extends Activity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		bodyText = (EditText) findViewById(R.id.body);
-		Button saveButton = (Button) findViewById(R.id.save);
-		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
-		Button clearButton = (Button) findViewById(R.id.clear);
+		bodyText = findViewById(R.id.body);
+		Button saveButton = findViewById(R.id.save);
+		oldTweetsList = findViewById(R.id.oldTweetsList);
+		Button clearButton = findViewById(R.id.clear);
 
 		saveButton.setOnClickListener(this);
 		clearButton.setOnClickListener(this);
