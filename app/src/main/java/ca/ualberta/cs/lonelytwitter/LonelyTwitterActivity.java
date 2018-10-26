@@ -13,8 +13,11 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +64,17 @@ public class LonelyTwitterActivity extends Activity {
 		adapter = new ArrayAdapter<Tweet>(this,
 				R.layout.list_item, tweetList);
 		oldTweetsList.setAdapter(adapter);
+		oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getApplicationContext(),
+						EditTweetActivity.class);
+				intent.putExtra("Pos", position);
+				startActivity(intent);
+			}
+		});
+
 	}
+
 
 
 	private void loadFromFile() {
