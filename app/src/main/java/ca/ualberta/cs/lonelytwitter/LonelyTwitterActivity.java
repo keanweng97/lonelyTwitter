@@ -111,4 +111,8 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
+
+	public ListView getOldTweetsList(){
+		return oldTweetsList;
+	}
 }
